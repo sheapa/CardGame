@@ -12,7 +12,7 @@ namespace CardGame
         protected List<PlayingCard> fullDeck = new List<PlayingCard>();
         protected List<PlayingCard> drawPile = new List<PlayingCard>();
         protected List<PlayingCard> discardPile = new List<PlayingCard>();
-        public void CreateDeck()
+        protected void CreateDeck()
         {
             fullDeck.Clear();
             for (int suit = 0; suit < 4; suit++)
@@ -35,13 +35,28 @@ namespace CardGame
 
         }
 
-        public abstract List<PlayingCard> DealCard();
+        public abstract List<PlayingCard> DealCards();
 
-        public virtual PlayingCard RequestCard()
+        protected virtual PlayingCard DrawOneCard()
         {
             PlayingCard output = drawPile.Take(1).First();
             drawPile.Remove(output);
             return output;
         }
+
+        public List<PlayingCard> RequestCards(List<PlayingCard> cardsToDiscard)
+        {
+
+            List<PlayingCard> output = new List<PlayingCard>();
+
+            foreach (var card in cardsToDiscard)
+            {
+                output.Add(DrawOneCard());
+                discardPile.Add(card);
+            }
+
+            return output;
+        }
+
     }
 }

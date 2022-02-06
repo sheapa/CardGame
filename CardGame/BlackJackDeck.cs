@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
-    public class PokerDeck : Deck
+    public class BlackJackDeck : Deck
     {
-        public PokerDeck()
-        {
-            CreateDeck();
-            ShuffleDeck();
-        }
         public override List<PlayingCard> DealCards()
         {
             List<PlayingCard> output = new List<PlayingCard>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 2; i++)
             {
                 output.Add(DrawOneCard());
             }
